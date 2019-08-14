@@ -23,7 +23,7 @@ int main(int argc, char* argv[]){
 	std::cout<<"Opening database...";
 	try{
 		connection C(
-			"dbname = test hostaddr = 127.0.0.1 port = 6000"
+			"dbname = test hostaddr = 127.0.0.1 port = 5432"
 		);
 		if(C.is_open()){
 			std::cout<<"done"<<std::endl;

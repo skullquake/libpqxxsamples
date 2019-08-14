@@ -3,10 +3,12 @@ SRC=./src/a.cpp
 BIN=./bin/a.out
 CXXFLAGS=\
      `pkg-config --cflags libpqxx`\
-     `pkg-config --cflags libpq`
+     `pkg-config --cflags libpq`\
+     `pkg-config --cflags jsoncpp`
 LIBS=\
      `pkg-config --libs libpqxx`\
-     `pkg-config --libs libpq`
+     `pkg-config --libs libpq`\
+     `pkg-config --libs jsoncpp`
 DBPATH=./db
 DBPORT=5432
 DBHOST=127.0.0.1

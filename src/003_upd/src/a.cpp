@@ -6,7 +6,7 @@ int main(int argc, char* argv[]){
 	char * sql;
 	try{
 		connection C(
-			"dbname = testdb hostaddr = 127.0.0.1 port = 5432"
+			"dbname = test hostaddr = 127.0.0.1 port = 5432"
 		);
 		if(C.is_open()){
 			cout<<"Opened database successfully: "<<C.dbname()<<endl;
