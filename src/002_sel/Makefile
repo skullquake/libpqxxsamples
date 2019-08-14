@@ -1,13 +1,12 @@
 CC=g++
 SRC=./src/a.cpp
 BIN=./bin/a.out
-CXXFLAGS=
-CSSFLAGS=\
-     `pkg-config --cflags libpq`\
-     `pkg-config --cflags libpqxx` 
+CXXFLAGS=\
+     `pkg-config --cflags libpqxx`\
+     `pkg-config --cflags libpq`
 LIBS=\
-     `pkg-config --libs libpq`\
-     `pkg-config --libs libpqxx`
+     `pkg-config --libs libpqxx`\
+     `pkg-config --libs libpq`
 DBPATH=./db
 DBPORT=5432
 DBHOST=127.0.0.1
@@ -28,6 +27,7 @@ $(BIN): $(SRC)
 	dbstop	\
 	dbpsql	\
 	dbsize	\
+	dbls	\
 	dbdrop	\
 	clean 
 run:
@@ -35,18 +35,6 @@ run:
 dbmk:
 	initdb \
 		$(DBPATH)
-dbdrop:
-	printf "drop database $(DBNAM);"|\
-		psql \
-		-h $(DBHOST) \
-		-p $(DBPORT) \
-		postgres
-dbinit:
-	printf "create database $(DBNAM);"|\
-		psql \
-		-h $(DBHOST) \
-		-p $(DBPORT) \
-		postgres
 dbrm:
 	rm \
 		-r $(DBPATH)
@@ -66,18 +54,42 @@ dbpsql:
 		-p $(DBPORT) \
 		$(DBNAM)
 dbvacuum:
-	printf "vacuum full;"|\
-		psql \
+	psql \
+		-P pager=off\
 		-h $(DBHOST) \
 		-p $(DBPORT) \
-		$(DBNAM)
+		-d $(DBNAM)\
+		-c "vacuum full;"
 dbsize:
-	printf "\
-		select pg_database_size('$(DBNAM)'),pg_size_pretty( pg_database_size('$(DBNAM)'));\
-		"|\
-		psql \
+	psql \
+		-P pager=off\
+		-h $(DBHOST)\
+		-p $(DBPORT)\
+		-d $(DBNAM)\
+		-c "select pg_database_size('$(DBNAM)'),pg_size_pretty( pg_database_size('$(DBNAM)'));"
+dbls:
+	psql \
+		-P pager=off\
 		-h $(DBHOST) \
 		-p $(DBPORT) \
-		$(DBNAM)
+		-d postgres \
+		-c "SELECT * FROM pg_catalog.pg_tables;"
+
+dbdrop:
+	psql \
+		-P pager=off\
+		-h $(DBHOST) \
+		-p $(DBPORT) \
+		-d postgres \
+		-c "drop database $(DBNAM);"
+dbinit:
+	psql \
+		-P pager=off\
+		-h $(DBHOST) \
+		-p $(DBPORT) \
+		-d postgres\
+		-c "create database $(DBNAM);"
 clean:
+	make dbstop
+	make dbrm
 	rm -r ./bin
