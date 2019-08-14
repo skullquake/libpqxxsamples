@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -d */|while read DIR;do mkdir $DIR/bin;make -C $DIR;done

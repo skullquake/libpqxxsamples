@@ -1,0 +1,36 @@
+postgres support for json types make it a graph database also
+
+json is a datatype you can set a field to
+json stands for javascript object notation
+you can store whole jsons in a field of type json and query it using sql extended notation
+
+json consists of kv pairs
+its mainly used as a transport between servers and clients
+json is human readable
+
+since 9.2 postgres supports native json data type functionality
+
+in the example c++ application you'll see how to create a table with a json field type, how to populate that table (we use jsoncpp library for creating the jsons) and also how to query into the json
+
+in terms of retrieving from the json, there is a -> operator as well as a ->> operator
+the difference is that the -> operator returns a JSON object, and that the ->> operator returns a specific node
+
+you can also apply aggregate functions to json,like min max average and sum, for example the average aggregate function example in the c++ program
+
+there is also a json_each() function in postgres sql
+this function allows us to expand the outermost json object into a set of key value pairs, much like when you have to iterate through the kv pais in javascript
+note in our c++ example we have the iterator flipping between customer and items, which are the two outermost keys
+{
+	"customer":"Customer_0",	<- first key
+	"items":{			<- second key
+		...
+	}
+}
+
+there is also a json_object_keys() function in postgres sql for json, which gets the actual keys
+in this case it will print in our c++ example product and qty, which are the keys in the json object's product value
+
+another very useful thing to use to determine the type of the value, is the json_typeof() function
+
+there are plenty more postgres json functions and you can find out more about them here:
+https://www.postgresql.org/docs/current/static/functions-json.html
