@@ -90,6 +90,4 @@ dbinit:
 		-d postgres\
 		-c "create database $(DBNAM);"
 clean:
-	make dbstop
-	make dbrm
-	rm -r ./bin
+	rm -r ./db ./bin
