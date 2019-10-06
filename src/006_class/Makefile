@@ -60,7 +60,7 @@ $(BUILDDIR)/%.o: %.cpp $(HEADERS)
 	dbls	\
 	dbdrop	\
 	clean 
-run:
+run: $(BIN)
 	$(BIN)
 dbmk:
 	initdb \

@@ -1,6 +1,6 @@
 #include"util/pg.h"
 namespace util{
-	Pg::Pg(std::string aHost="127.0.0.1",std::string aPort="5000")
+	Pg::Pg(std::string aHost,std::string aPort)
 	:mHost(aHost),
 	 mPort(aPort)
 	{

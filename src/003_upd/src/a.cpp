@@ -3,11 +3,12 @@
 using namespace std;
 using namespace pqxx;
 int main(int argc, char* argv[]){
-	char * sql;
 	try{
-		connection C(
-			"dbname = test hostaddr = 127.0.0.1 port = 5432"
-		);
+		connection C(R"(
+dbname = test
+hostaddr = 127.0.0.1
+port = 5432
+		)");
 		if(C.is_open()){
 			cout<<"Opened database successfully: "<<C.dbname()<<endl;
 		}else{
@@ -15,12 +16,14 @@ int main(int argc, char* argv[]){
 			return 1;
 		}
 		/* Create SQL statement */
-		sql=	"CREATE TABLE IF NOT EXISTS COMPANY("\
-			"ID INT PRIMARY KEY     NOT NULL,"\
-			"NAME           TEXT    NOT NULL,"\
-			"AGE            INT     NOT NULL,"\
-			"ADDRESS        CHAR(50),"\
-			"SALARY         REAL );";
+		std::string sql=R"(
+CREATE TABLE IF NOT EXISTS COMPANY(
+ID INT PRIMARY KEY     NOT NULL,
+NAME           TEXT    NOT NULL,
+AGE            INT     NOT NULL,
+ADDRESS        CHAR(50),
+SALARY         REAL );
+		)";
 		/* Create a transactional object. */
 		work W(C);
 		/* Execute SQL query */
@@ -39,17 +42,18 @@ int main(int argc, char* argv[]){
 
 
 		/* Create SQL statement */
-		sql=	"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "\
-			"VALUES (1, 'Paul', 32, 'California', 20000.00 ); "\
-			"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "\
-			"VALUES (2, 'Allen', 25, 'Texas', 15000.00 ); "\
-			"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)"\
-			"VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );"\
-			"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)"\
-			"VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );"\
-			"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)"\
-			"VALUES (5, 'Ockert', 32, 'Johnannesburg', 5000.00 );"
-		;
+		sql=R"(
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (1, 'Paul', 32, 'California', 20000.00 );
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (2, 'Allen', 25, 'Texas', 15000.00 );
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (5, 'Ockert', 32, 'Johnannesburg', 5000.00 );
+		)";
 		/* Create a transactional object. */
 		work W3(C);
 		/* Execute SQL query */
@@ -64,9 +68,9 @@ int main(int argc, char* argv[]){
 		W4.commit();
 		cout<<"Records updated successfully"<<endl;
 		/* Create SQL SELECT statement */
-		sql = "SELECT * from COMPANY";
-		/* Create SQL statement */
-		sql="SELECT * from COMPANY";
+		sql=R"(
+SELECT * from COMPANY
+		)";
 		/* Create a non-transactional object. */
 		nontransaction N(C);
 		/* Execute SQL query */

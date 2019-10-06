@@ -3,10 +3,14 @@
 using namespace std;
 using namespace pqxx;
 int main(int argc, char* argv[]){
-	char * sql;
 	try{
 		connection C(
-			"dbname = test hostaddr = 127.0.0.1 port = 5432"
+			std::string(R"(
+dbname = test
+hostaddr = 127.0.0.1
+port = 5432
+)"
+			)
 	);
 	if(C.is_open()){
 		cout<<"Opened database successfully: "<<C.dbname()<<endl;
@@ -15,12 +19,16 @@ int main(int argc, char* argv[]){
 		return 1;
 	}
 	/* Create SQL statement */
-	sql=	"CREATE TABLE IF NOT EXISTS COMPANY("  \
-		"ID INT PRIMARY KEY     NOT NULL," \
-		"NAME           TEXT    NOT NULL," \
-		"AGE            INT     NOT NULL," \
-		"ADDRESS        CHAR(50)," \
-		"SALARY         REAL );";
+	std::string sql=R"(
+CREATE TABLE IF NOT EXISTS COMPANY
+(
+	ID INT PRIMARY KEY NOT NULL,
+	NAME TEXT NOT NULL,
+	AGE INT NOT NULL,
+	ADDRESS CHAR(50),
+	SALARY REAL
+);
+)";
 	/* Create a transactional object. */
 	work W(C);
 	/* Execute SQL query */

@@ -30,7 +30,7 @@ $(BIN): $(SRC)
 	dbls	\
 	dbdrop	\
 	clean 
-run:
+run: $(BIN)
 	$(BIN)
 dbmk:
 	initdb \

@@ -6,7 +6,7 @@ int main(int argc, char* argv[]){
 	pqxx::connection* c;
 	pqxx::result r;
 	std::string host("127.0.0.1");
-	std::string port("5000");
+	std::string port("5432");
 	try{
 		//--------------------------------------------------------------------------------
 		//dummy connect (to template1 to create test for dbnam exists and ?create dbnam)

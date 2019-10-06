@@ -5,7 +5,12 @@ using namespace pqxx;
 int main(int argc, char* argv[]){
 	std::stringstream buffer;
 	try{
-		connection C("dbname=test hostaddr=127.0.0.1 port=5432");
+		connection C(R"(
+dbname=test
+hostaddr=127.0.0.1
+port=5432
+)"
+		);
 	if(C.is_open()){
 		std::cout<<"Opened database successfully: "<<C.dbname()<<std::endl;
 	}else{
@@ -34,7 +39,7 @@ int main(int argc, char* argv[]){
 	v.push_back("bar");
 	v.push_back("baz");
 	v.push_back("qux");
-	for(int i=1;i<4096;i++){
+	for(int i=1;i<32;i++){
 		buffer.str("");
 		buffer	<<"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "
 			<<"VALUES ("<<i<<", '"<<v[rand()%v.size()]<<"', "<<rand()%50<<", '"<<v[rand()%v.size()]<<"', "<<rand()%5000<<");";

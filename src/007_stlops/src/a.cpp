@@ -12,7 +12,7 @@
 #include<vector>
 #include"util/pg.h"
 int main(int argc, char* argv[]){
-	util::Pg p("127.0.0.1","5000");
+	util::Pg p("127.0.0.1","5432");
 	p.connect("template1");
 	std::string dbnam="test3";
 	if(p.execnt("SELECT * FROM pg_database WHERE datname = '"+dbnam+"'").size()>0){
