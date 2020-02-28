@@ -6,11 +6,9 @@ int main(int argc, char* argv[]){
 	try{
 		connection C(
 			std::string(R"(
-dbname=test
-user=test
-password=1 
-hostaddr=127.0.0.1
-port=6000
+dbname = test
+hostaddr = 127.0.0.1
+port = 5432
 )"
 			)
 	);
@@ -20,23 +18,6 @@ port=6000
 		cout<<"Can't open database"<<endl;
 		return 1;
 	}
-	/* Create SQL statement */
-	std::string sql=R"(
-CREATE TABLE IF NOT EXISTS COMPANY
-(
-	ID INT PRIMARY KEY NOT NULL,
-	NAME TEXT NOT NULL,
-	AGE INT NOT NULL,
-	ADDRESS CHAR(50),
-	SALARY REAL
-);
-)";
-	/* Create a transactional object. */
-	work W(C);
-	/* Execute SQL query */
-	W.exec(sql);
-	W.commit();
-	cout<<"Table created successfully"<<endl;
 	C.disconnect();
 	}catch(const std::exception &e){
 		cerr<<e.what()<<std::endl;

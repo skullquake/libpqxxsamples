@@ -22,20 +22,19 @@ int main(int argc, char* argv[]){
 		p.execnt("CREATE DATABASE "+dbnam);
 	}
 	p.connect(dbnam);
-	p.exect(
-		"DROP TABLE IF EXISTS COMPANY;"
-	);
-	p.exect(
-		"CREATE TABLE IF NOT EXISTS COMPANY("\
-		"	ID INT PRIMARY KEY     NOT NULL,"\
-		"	NAME           TEXT    NOT NULL,"\
-		"	SURNAME	TEXT    NOT NULL,"\
-		"	AGE            INT     NOT NULL,"\
-		"	ADDRESS        CHAR(50),"\
-		"	SALARY         REAL"\
-		");"
-
-	);
+	p.exect(R"(
+DROP TABLE IF EXISTS COMPANY;
+	)");
+	p.exect(R"(
+CREATE TABLE IF NOT EXISTS COMPANY(
+	ID INT PRIMARY KEY     NOT NULL,
+	NAME           TEXT    NOT NULL,
+	SURNAME	TEXT    NOT NULL,
+	AGE            INT     NOT NULL,
+	ADDRESS        CHAR(50),
+	SALARY         REAL
+);
+	)");
 	std::random_device rd;
 	std::mt19937 g(rd());
 	std::uniform_int_distribution<> d(0,4096);
@@ -54,7 +53,6 @@ int main(int argc, char* argv[]){
 		"Modise",
 		"Swartz",
 		"Booysen"
-//A total of 377 Van Wyk babies were born in the year under review, followed by Louw (274), Cloete (201), Jacobs (173), Olyn (127), Visagie (116), Beukes (104), Modise (103), Swartz (94) and Booysen (90).
 	};
 	std::vector<std::string> location={
 		"Barkly West",
@@ -157,17 +155,12 @@ int main(int argc, char* argv[]){
 				field!=row->end();
 				++field
 			){
-
-				//std::cout<<field->name()<<":";
-				//std::cout<<field->c_str()<<'\t';
 				hmc[field->name()].push_back(field->c_str());
 			}
 		}
 	}else{
 		std::cout<<"No results"<<std::endl;
 	}
-	//for(std::pair<std::string,std::vector<std::string>& col:hmc){
-	//std::pair<const std::__cxx11::basic_string<char>, std::vector<std::__cxx11::basic_string<char> > >
 	for(std::pair<std::string,std::vector<std::string>> itcol:hmc){
 		std::cout<<"--------------------------------------------------------------------------------"<<std::endl;
 		std::cout<<itcol.first<<std::endl;
@@ -182,13 +175,9 @@ int main(int argc, char* argv[]){
 				}
 			);
 			if(it!=itcol.second.end())
-				std::cout<<std::distance(itcol.second.begin(),it)<<"\t"<<*it<<std::endl;//*std::prev(it)<<std::endl;
-
+				std::cout<<std::distance(itcol.second.begin(),it)<<"\t"<<*it<<std::endl;
 			}
 		}
-
 	p.disconnect();
 	return 0;
 }
-
-
