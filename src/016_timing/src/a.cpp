@@ -31,7 +31,7 @@ port=5432
 		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Done"<<std::endl;
 		std::chrono::time_point<std::chrono::system_clock> t1=std::chrono::system_clock::now();
 		auto td=std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0);
-		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<std::endl;
+		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<" ms"<<std::endl;
 	}
 	{
 		std::chrono::time_point<std::chrono::system_clock> t0=std::chrono::system_clock::now();
@@ -49,7 +49,7 @@ port=5432
 		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Done"<<std::endl;
 		std::chrono::time_point<std::chrono::system_clock> t1=std::chrono::system_clock::now();
 		auto td=std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0);
-		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<std::endl;
+		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<" ms"<<std::endl;
 	}
 	{
 		std::chrono::time_point<std::chrono::system_clock> t0=std::chrono::system_clock::now();
@@ -64,7 +64,7 @@ port=5432
 		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Done"<<std::endl;
 		std::chrono::time_point<std::chrono::system_clock> t1=std::chrono::system_clock::now();
 		auto td=std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0);
-		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<std::endl;
+		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<" ms"<<std::endl;
 	}
 	{
 		std::chrono::time_point<std::chrono::system_clock> t0=std::chrono::system_clock::now();
@@ -83,7 +83,7 @@ port=5432
 		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Done..."<<std::endl;
 		std::chrono::time_point<std::chrono::system_clock> t1=std::chrono::system_clock::now();
 		auto td=std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0);
-		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<std::endl;
+		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<" ms"<<std::endl;
 	}
 	{
 		std::chrono::time_point<std::chrono::system_clock> t0=std::chrono::system_clock::now();
@@ -106,7 +106,7 @@ port=5432
 		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Done"<<std::endl;
 		std::chrono::time_point<std::chrono::system_clock> t1=std::chrono::system_clock::now();
 		auto td=std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0);
-		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<std::endl;
+		std::cout<<std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()<<": "<<"Elapsed: "<<td.count()<<" ms"<<std::endl;
 	}
 	C.disconnect();
 	}catch(const std::exception &e){
